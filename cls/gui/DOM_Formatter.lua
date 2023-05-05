@@ -1,15 +1,11 @@
-local ClassPrototype = require("cls.ClassPrototype")
+local Formatter = require("cls.gui.ControllersFormatter")
+
 DOM_Formatter = {}
 DOM_Formatter.__index = DOM_Formatter
 
 function DOM_Formatter:new(ControllersList, ListParent)
-    local o = 
-    local o = {
-        controllers = ControllersList,
-        parent = ListParent
-    }
-    o.__index = self
-    return setmetatable(o, DOM_Formatter)
+    local o = Formatter:new(ControllersList, ListParent)
+    return o
 end
 
 function DOM_Formatter:format()

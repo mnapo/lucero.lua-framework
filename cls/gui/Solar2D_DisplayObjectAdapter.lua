@@ -1,9 +1,11 @@
+local SDK_Adapter = require("cls.gui.SDK_DisplayObjectAdapter")
+
 Solar2D_Adapter = {}
 Solar2D_Adapter.__index = Solar2D_Adapter
 
 function Solar2D_Adapter:new(o)
-	local o = o or {}
-	return setmetatable(o, Solar2D_Adapter)
+	local o = SDK_Adapter:new()
+	return o
 end
 
 function Solar2D_Adapter:get(property, value)

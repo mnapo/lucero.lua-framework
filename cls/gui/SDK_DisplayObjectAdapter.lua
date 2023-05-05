@@ -1,3 +1,5 @@
+local ClassPrototype = require("cls.ClassPrototype")
+
 Adapter = {}
 Adapter.__index = Adapter
 

@@ -1,4 +1,5 @@
-local Object = require("classes.ControllerPrototype")
+--[TO-DO] package preloading
+local Object = require("cls.gui.ControllerPrototype")
 local Screen = Object:new("screen", nil, nil)
 local Body = Object:new("body", nil, Screen)
 --local controller4 = Object:new("cuadradito4", {x = 0, y = 0, width = Body:get("width")/3, height = controller:get("height")/3})

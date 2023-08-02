@@ -16,4 +16,8 @@ function ClassPrototype:destroy()
 	self = nil
 end
 
+function ClassPrototype:debugging_log()
+	return self
+end
+
 return ClassPrototype

@@ -14,7 +14,8 @@ ClassPrototype = require("ClassPrototype")
 --necessary classes loading
 for i = 1, #_REQUIRED_CLASSES do
     local name = _REQUIRED_CLASSES[i]
-    _REQUIRED_CLASSES[i] = {name, require(name):new()}
+    local dummy = require(name):new()
+    _REQUIRED_CLASSES[i] = {name, dummy}
 end
 
 --debugging prints
@@ -30,9 +31,10 @@ if _DEBUG_MODE_ON then
     }
     --add tests for necessary classes
     for i = 1, #_REQUIRED_CLASSES do
-        tests[#tests+1] = _REQUIRED_CLASSES[i]
+        local result = _REQUIRED_CLASSES[i][2]:debugging_log()
+        tests[#tests+1] = {_REQUIRED_CLASSES[i][1], result}
     end
-    --run tests
+    --print tests
     for i = 1, #tests do
         tests[i][2] = tostring(tests[i][2]) or "none (error)"
         test_print(tests[i][1], tests[i][2])

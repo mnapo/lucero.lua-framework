@@ -1,14 +1,16 @@
-local Formatter = require("cls.gui.ControllersFormatter")
-
-DOM_Formatter = {}
+local Formatter = require("ControllersFormatter")
+local DOM_Formatter = Formatter:new()
 DOM_Formatter.__index = DOM_Formatter
 
 function DOM_Formatter:new(ControllersList, ListParent)
     local o = Formatter:new(ControllersList, ListParent)
+    o = setmetatable(o, self)
+    o.__index = self
     return o
 end
 
 function DOM_Formatter:format()
+--[[TO-DO: uncomment after testing
     local parent_id = ""
     local ini_x = 0
     local ini_y = 0
@@ -27,7 +29,7 @@ function DOM_Formatter:format()
     for i = 1, #self.controllers do
         local Leaf = self.controllers[i]
         leaf_id = Leaf:get("id")
-        print("Recorriendo: "..leaf_id)
+        print("Leaf inspection: "..leaf_id)
         local leaf_x = last_leaf_right
         local leaf_y = last_leaf_bottom
         local leaf_width = Leaf:get("width")
@@ -52,7 +54,13 @@ function DOM_Formatter:format()
         Leaf:set("x", leaf_x)
         Leaf:set("y", leaf_y)
         LeafChildrenFormatter:format()
-    end
+    end]]
+    return "test"
+end
+
+--[TO-DO]: delete (testing)
+function DOM_Formatter:print_parent()
+    print(self.parent)
 end
 
 return DOM_Formatter

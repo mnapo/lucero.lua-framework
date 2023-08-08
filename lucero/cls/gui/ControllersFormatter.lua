@@ -1,12 +1,17 @@
 local ClassPrototype = require("ClassPrototype")
-
-Formatter = {}
+local Formatter = ClassPrototype:new()
 Formatter.__index = Formatter
 
 function Formatter:new(ControllersList, ListParent)
+    local o = ClassPrototype:new()
+    o = setmetatable(o, self)
+    o.__index = self
+    o:set("parent", ListParent):set("controllers", ControllersList)
+    return o
 end
 
 function Formatter:format()
+    return "hi"
 end
 
 return Formatter

@@ -2,7 +2,7 @@
 _LIB_NAME = "lucero"
 _DIR_CLASSES = "./".._LIB_NAME.."/cls"
 _DIR_GUI = "./".._LIB_NAME.."/cls/gui"
-_REQUIRED_CLASSES = {"ControllersFormatter"} --determines which classess are necessary
+_REQUIRED_CLASSES = {"DOM_Formatter"} --determines which classess are necessary
 _DEBUG_MODE_ON = true --set to true to print command-line logs
 
 --path setup
@@ -22,7 +22,7 @@ end
 if _DEBUG_MODE_ON then
     --helper function for tests printing
     local test_print = function(name, result)
-        print(name.." set to "..result.." ("..os.time()..")")
+        print(name.."'s test | result: "..result.." ("..os.time()..")")
     end
     --define basic tests
     local tests = {
@@ -31,9 +31,14 @@ if _DEBUG_MODE_ON then
     }
     --add tests for necessary classes
     for i = 1, #_REQUIRED_CLASSES do
-        local result = _REQUIRED_CLASSES[i][2]:debugging_log()
-        tests[#tests+1] = {_REQUIRED_CLASSES[i][1], result}
+        local test = _REQUIRED_CLASSES[i][2]
+        if not (test == nil) then
+            local result = _REQUIRED_CLASSES[i][2]:debugging_log()
+            tests[#tests+1] = {_REQUIRED_CLASSES[i][1], result}
+        end
     end
+    --additional tests
+    tests[#tests+1] = {_REQUIRED_CLASSES[1][1], _REQUIRED_CLASSES[1][2]:format()}
     --print tests
     for i = 1, #tests do
         tests[i][2] = tostring(tests[i][2]) or "none (error)"
@@ -41,4 +46,3 @@ if _DEBUG_MODE_ON then
     end
     --while true do end --keeps cmd opened
 end
-

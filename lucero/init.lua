@@ -4,12 +4,24 @@ _DIR_CLASSES = "./".._LIB_NAME.."/cls"
 _DIR_GUI = "./".._LIB_NAME.."/cls/gui"
 _REQUIRED_CLASSES = {"DOM_Formatter"} --determines which classess are necessary
 _DEBUG_MODE_ON = true --set to true to print command-line logs
+_SDK_NAME_DEFAULT = "solar2D"
+_VALID_SDK_NAMES = {"solar2D", "react", "defold", "custom"}
 
 --path setup
 package.path = package.path..";".._DIR_CLASSES.."/?.lua;".._DIR_GUI.."/?.lua"
 
 --base class loading
 ClassPrototype = require("ClassPrototype")
+
+--helpers/global use functions
+function isIn(t, v)
+    for i = 1, #t do
+        if (t[i] == v) then
+            return true
+        end
+    end
+    return false
+end
 
 --necessary classes loading
 for i = 1, #_REQUIRED_CLASSES do

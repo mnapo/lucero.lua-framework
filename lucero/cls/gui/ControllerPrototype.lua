@@ -6,9 +6,9 @@
         - wraps visual elements and its data model
         - can emit and respond to events
         - can wrap an SDK's DisplayObject (as ShapeController) or other Controllers
-        - might be formatted by a ControllersFormatted
+        - might be formatted by a ControllersFormatter
         - ultimately it is indirectly rendered by SDK libraries
-        ShapeFactory + SDK_DisplayObjectAdapter -> Shape -> CircleShape, RectShape, TextShape...
+        ShapeFactory + SDK_DisplayObjectAdapter -> ShapeController -> CircleShape, RectShape, TextShape...
         ShapeController: adapts a Shape as a Controller
 ]]
 local ClassPrototype = require("cls.ClassPrototype")
@@ -53,15 +53,6 @@ function ControllerPrototype:new(id, props, parent)
     o.display_object.anchorX = 0
     o.display_object.anchorY = 0
     return setmetatable(o, self)
-end
-
-local function isIn(t, v)
-    for i = 1, #t do
-        if (t[i] == v) then
-            return true
-        end
-    end
-    return false
 end
 
 function ControllerPrototype:get(prop)

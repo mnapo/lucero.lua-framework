@@ -1,7 +1,6 @@
 local ClassPrototype = require("ClassPrototype")
 local ControllersFormatter = require("ControllersFormatter")
-
-Controller = {}
+local Controller = ClassPrototype:new()
 Controller.__index = Controller
 
 Controller:new(id, props, parent, children)
@@ -26,14 +25,14 @@ end
 function Controller:append(Child)
     table.insert(self.children, Child)
     self.children[#self.children]:set("parent", self)
-    local ChildrenFormatter = ControllersFormatter:new(self.children, self)
+    local ChildrenFormatter = _CONTROLLERS_FORMATTER:new(self.children, self)
     ChildrenFormatter:format()
 end
 
 function Controller:remove(child_index)
     self.children[child_index]:set("parent", nil)
     table.remove(self.children, child_index)
-    local ChildrenFormatter = ControllersFormatter:new(self.children, self)
+    local ChildrenFormatter = _CONTROLLERS_FORMATTER:new(self.children, self)
     ChildrenFormatter:format()
 end
 

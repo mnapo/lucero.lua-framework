@@ -1,11 +1,11 @@
-local ClassPrototype = require("ClassPrototype")
+local ControllersFactory = require("ControllersFactory")
 local ShapeController = require("Shape")
 local StyledShapeController = require("StyledShape")
-local Factory = ClassPrototype:new()
+local Factory = ControllersFactory:new()
 Factory.__index = Factory
 
 function Factory:new(selected_SDK)
-    local o = ClassPrototype:new()
+    local o = ControllersFactory:new()
     o = setmetatable(o, self)
     o.__index = self
     return o

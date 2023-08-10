@@ -3,6 +3,7 @@ local Formatter = ClassPrototype:new()
 Formatter.__index = Formatter
 
 function Formatter:new(ControllersList, ListParent)
+    _CONTROLLERS_FORMATTER = self
     local o = ClassPrototype:new()
     o = setmetatable(o, self)
     o.__index = self

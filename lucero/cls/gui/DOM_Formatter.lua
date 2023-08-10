@@ -4,6 +4,7 @@ DOM_Formatter.__index = DOM_Formatter
 
 function DOM_Formatter:new(ControllersList, ListParent)
     local o = Formatter:new(ControllersList, ListParent)
+    _CONTROLLERS_FORMATTER = self
     o = setmetatable(o, self)
     o.__index = self
     return o

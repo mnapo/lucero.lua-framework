@@ -1,7 +1,6 @@
-local Controller = require("Controller")
+local Shape = require("Shape")
 local ControllersFormatter = require("ControllersFormatter")
-
-ShapeController = {}
+local ShapeController = Shape:new()
 ShapeController.__index = ShapeController
 
 function ShapeController:new(id, props, parent, children)

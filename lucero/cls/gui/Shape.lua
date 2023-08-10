@@ -1,7 +1,6 @@
 local Controller = require("Controller")
 local ControllersFormatter = require("ControllersFormatter")
-
-ShapeController = {}
+local ShapeController = Controller:new()
 ShapeController.__index = ShapeController
 
 function ShapeController:new(id, props, parent, children)
@@ -67,7 +66,7 @@ function Controller:set(prop, value)
             end
             if (self.parent) then
                 print("Se afectó una variable dimensional de "..self.id.."(padre: "..self.parent.id.."). Se ajustan los hijos del padre:")
-                local ParentFormatter = ControllersFormatter:new(self.parent.children, self.parent)
+                local ParentFormatter = _CONTROLLERS_FORMATTER:new(self.parent.children, self.parent)
                 ParentFormatter:format()
             end
         end
@@ -79,14 +78,14 @@ end
 function ShapeController:append(Child)
     table.insert(self.children, Child)
     self.children[#self.children]:set("parent", self)
-    local ChildrenFormatter = ControllersFormatter:new(self.children, self)
+    local ChildrenFormatter = _CONTROLLERS_FORMATTER:new(self.children, self)
     ChildrenFormatter:format()
 end
 
 function ShapeController:remove(child_index)
     self.children[child_index]:set("parent", nil)
     table.remove(self.children, child_index)
-    local ChildrenFormatter = ControllersFormatter:new(self.children, self)
+    local ChildrenFormatter = _CONTROLLERS_FORMATTER:new(self.children, self)
     ChildrenFormatter:format()
 end
 

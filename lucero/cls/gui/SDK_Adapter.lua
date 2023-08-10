@@ -25,7 +25,9 @@ end
 
 function Adapter:create_Presentation(object_type, options)
     local o = {
-        ["object_type"] = object_type
+        ["object_type"] = object_type,
+        table.unpack(options)
+    }
     table.unpack(options)}
     return o
 end

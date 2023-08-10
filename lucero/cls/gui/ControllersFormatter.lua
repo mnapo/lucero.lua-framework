@@ -12,7 +12,6 @@ function Formatter:new(ControllersList, ListParent)
 end
 
 function Formatter:format()
-    return "hi"
 end
 
 return Formatter

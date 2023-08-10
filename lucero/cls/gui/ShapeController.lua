@@ -1,5 +1,5 @@
-local Controller = require("cls.Controller")
-local ControllersFormatter = require("cls.gui.ControllersFormatter")
+local Controller = require("Controller")
+local ControllersFormatter = require("ControllersFormatter")
 
 ShapeController = {}
 ShapeController.__index = ShapeController

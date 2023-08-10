@@ -1,10 +1,10 @@
-local ClassPrototype = require("cls.ClassPrototype")
-local ControllersFormatter = require("cls.gui.ControllersFormatter")
+local ClassPrototype = require("ClassPrototype")
+local ControllersFormatter = require("ControllersFormatter")
 
 Controller = {}
 Controller.__index = Controller
 
-funcController:new(id, props, parent, children)
+Controller:new(id, props, parent, children)
     local o = ClassPrototype:new()
     local props = props or {x = 0, y = 0}
     id = id or autoset_id()

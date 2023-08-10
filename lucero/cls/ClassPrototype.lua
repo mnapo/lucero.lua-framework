@@ -17,7 +17,8 @@ function ClassPrototype:set(member, value)
 	value = value or "none"
 	if (_DEBUG_MODE_ON) then
 		local self_ref = tostring(self)
-		print(self_ref.."'s "..member.." set to "..value)
+		local value_or_ref = tostring(value)
+		print(self_ref.."'s "..member.." set to "..value_or_ref)
 	end
 	self.member = value
 	return self --allows chained calls

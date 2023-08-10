@@ -4,22 +4,22 @@ Adapter.__index = Adapter
 
 local valid_SDK_names = _SDK_VALID_NAMES or {}
 
-function Adapter:new(SDK_Bridge, ShapeFactory)
+function Adapter:new(SDK_Bridge)
     local o = ClassPrototype:new()
-    o:set("SDK_Bridge", SDK_Bridge):set("ShapeFactory", ShapeFactory)
+    o:set("SDK_Bridge", SDK_Bridge)
     o = setmetatable(o, self)
     o.__index = self
     return o
 end
 
 function Adapter:set_SDK_Bridge(SDK_Bridge)
-    if (isIn(valid_SDK_names, SDK_Bridge:get("selected_SDK"))) then
+    local test = "invalid SDK"--TO-DO: remove after testing
+    print(tostring(SDK_Bridge))
+    if (is_in(valid_SDK_names, SDK_Bridge:get("selected_SDK"))) then
         self:set("SDK_Bridge", SDK_Bridge)
+        test = "SDK_Bridge set to "..tostring(SDK_Bridge)--test, remove
     end
-end
-
-function Adapter:set_ShapeFactory(ShapeFactory)
-        self:set("ShapeFactory", ShapeFactory)
+    return test --remove
 end
 
 function Adapter:create_DisplayObject(type, options)

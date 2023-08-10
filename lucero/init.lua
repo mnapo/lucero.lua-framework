@@ -1,11 +1,17 @@
 --global configuration
 _LIB_NAME = "lucero"
+
 _DIR_CLASSES = "./".._LIB_NAME.."/cls"
 _DIR_GUI = "./".._LIB_NAME.."/cls/gui"
-_REQUIRED_CLASSES = {"DOM_Formatter"} --determines which classess are necessary
+
+_REQUIRED_CLASSES = {"DOM_Formatter", "SDK_Bridge", "SDK_Adapter"} --determines which classess are necessary
+
 _DEBUG_MODE_ON = true --set to true to print command-line logs
+
+_SDK_VALID_NAMES = {"solar2D", "react", "defold", "custom"}
 _SDK_NAME_DEFAULT = "solar2D"
-_VALID_SDK_NAMES = {"solar2D", "react", "defold", "custom"}
+
+_SDK_SELECTED = _SDK_NAME_DEFAULT
 
 --path setup
 package.path = package.path..";".._DIR_CLASSES.."/?.lua;".._DIR_GUI.."/?.lua"
@@ -14,7 +20,17 @@ package.path = package.path..";".._DIR_CLASSES.."/?.lua;".._DIR_GUI.."/?.lua"
 ClassPrototype = require("ClassPrototype")
 
 --helpers/global use functions
-function isIn(t, v)
+function print_table(t)
+    print(tostring(t).."'s values:")
+    for i = 1, #t do
+        print(i..") "..tostring(t[i]))
+    end
+    for k, v in pairs(t) do
+        print(tostring(k)..") "..tostring(v))
+    end
+end
+
+function is_in(t, v)
     for i = 1, #t do
         if (t[i] == v) then
             return true
@@ -51,6 +67,10 @@ if _DEBUG_MODE_ON then
     end
     --additional tests
     tests[#tests+1] = {_REQUIRED_CLASSES[1][1], _REQUIRED_CLASSES[1][2]:format()}
+    tests[#tests+1] = {_REQUIRED_CLASSES[2][1], _REQUIRED_CLASSES[2][2]:select_SDK("solar2D")}
+    tests[#tests+1] = {_REQUIRED_CLASSES[2][1], _REQUIRED_CLASSES[2][2]:get("creators")["circle"]}
+    tests[#tests+1] = {_REQUIRED_CLASSES[3][1], _REQUIRED_CLASSES[3][2]:set_SDK_Bridge(_REQUIRED_CLASSES[2][2])}
+    
     --print tests
     for i = 1, #tests do
         tests[i][2] = tostring(tests[i][2]) or "none (error)"

@@ -15,6 +15,7 @@ _SHAPES_VALID = {"rect", "circle", "text", "label", "line", "polygon", "particle
 --[TO-DO] complete list _SHAPES_MODIFICATIONS_VALID = {"corners", "background-color", "position"}
 
 _SDK_SELECTED = _SDK_NAME_DEFAULT
+_CONTROLLERS_FORMATTER = nil
 
 _MEMBERS_SPECIAL = {
     "id",

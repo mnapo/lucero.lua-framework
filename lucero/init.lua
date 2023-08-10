@@ -11,7 +11,27 @@ _DEBUG_MODE_ON = true --set to true to print command-line logs
 _SDK_VALID_NAMES = {"solar2D", "react", "defold", "custom"}
 _SDK_NAME_DEFAULT = "solar2D"
 
+_SHAPES_VALID = {"rect", "circle", "text", "label", "line", "polygon", "particle-system"}
+--[TO-DO] complete list _SHAPES_MODIFICATIONS_VALID = {"corners", "background-color", "position"}
+
 _SDK_SELECTED = _SDK_NAME_DEFAULT
+
+_MEMBERS_SPECIAL = {
+    "id",
+    "children",
+    "parent",
+    "color"
+}
+_MEMBERS_DIMENTIONAL = {
+    "x",
+    "y",
+    "width",
+    "height",
+    "margin_left",
+    "margin_right",
+    "margin_top",
+    "margin_bottom"
+}
 
 --path setup
 package.path = package.path..";".._DIR_CLASSES.."/?.lua;".._DIR_GUI.."/?.lua"
@@ -37,6 +57,11 @@ function is_in(t, v)
         end
     end
     return false
+end
+
+function autoset_id()
+    --[TO-DO] Strategy
+    return "undefined"
 end
 
 --necessary classes loading

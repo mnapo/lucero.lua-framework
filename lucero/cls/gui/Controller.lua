@@ -3,19 +3,18 @@ local ControllersFormatter = require("ControllersFormatter")
 local Controller = ClassPrototype:new()
 Controller.__index = Controller
 
-Controller:new(id, props, parent, children)
+function Controller:new(id, props, parent, children, presentation)
     local o = ClassPrototype:new()
     local props = props or {x = 0, y = 0}
     id = id or autoset_id()
     parent = parent or {}
     children = children or {}
+    presentation = presentation or {}
 
 	o:set("id", id)
     :set("parent", parent)
     :set("children", children)
-
-	o.display_object["anchorX"] = 0
-	o.display_object["anchorY"] = 0
+    :set("presentation", presentation)
 
     o = setmetatable(o, self)
     o.__index = self

@@ -65,6 +65,10 @@ function autoset_id()
     return "undefined"
 end
 
+function rules_to_presentation(rules, parser)
+    return parser.parse_rules(rules)
+end
+
 --necessary classes loading
 for i = 1, #_REQUIRED_CLASSES do
     local name = _REQUIRED_CLASSES[i]

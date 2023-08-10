@@ -11,11 +11,11 @@ function Factory:new(selected_SDK)
     return o
 end
 
-function Factory:create(id, object_type, options, parent, style)
+function Factory:create(id, presentation_type, options, parent, children, presentation, style)
     id = id or autoset:id()
-    local display_object = _SDK_SELECTED:create_DisplayObject(object_type, options)
+    local display_object = _SDK_SELECTED:create_DisplayObject(presentation_type, options)
     if style then
-        return StyledShape:new(id, options, parent):set("display_object", display_object)
+        return StyledShape:new(id, options, parent):set("presentation", display_object)
     else
         return Shape:new(id, options, parent, style):set("display_object", display_object)
     end

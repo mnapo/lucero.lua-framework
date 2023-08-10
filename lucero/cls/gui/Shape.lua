@@ -3,14 +3,15 @@ local ControllersFormatter = require("ControllersFormatter")
 local ShapeController = Controller:new()
 ShapeController.__index = ShapeController
 
-function ShapeController:new(id, props, parent, children)
+function ShapeController:new(id, props, parent, children, presentation)
     local o = Controller:new()
     local props = props or {x = 0, y = 0, width = display.actualContentWidth, height = display.actualContentHeight}
     id = id or autoset_id()
-    parent = props["parent"] or {}
-    children = props["children"] or {}
+    parent = parent or {}
+    children = children or {}
+    presentation = presentation or {}
 
-	o:set(display_object, props["display_object"])
+	o:set("presentation", presentation)
     :set("id", id)
     :set("parent", parent)
     :set("children", children)
@@ -23,8 +24,8 @@ function ShapeController:new(id, props, parent, children)
 	:set("margin_top", props["margin_top"])
 	:set("margin_bottom", props["margin_bottom"])
 
-	o.display_object["anchorX"] = 0
-	o.display_object["anchorY"] = 0
+	o["presentation"]["anchorX"] = 0
+	o["presentation"]["anchorY"] = 0
 
     o = setmetatable(o, self)
     o.__index = self
@@ -34,7 +35,7 @@ end
 function Controller:get(prop)
     if (is_in(_MEMBERS_SPECIAL, prop)) then
         if (prop == "color") then
-            return self.display_object["fill_color"]
+            return self["presentation"]["fill_color"]
         else --if (prop == "parent" or prop == "children" or prop == "margin_left" or prop == "margin_right" or prop == "margin_top" or prop == "margin_bottom") then
             return self[prop]
         end
@@ -42,16 +43,16 @@ function Controller:get(prop)
     if (is_in(_MEMBERS_DIMENTIONAL, prop)) then
             return self[prop]
     end
-    return self.display_object[prop]
+    return self["presentation"][prop]
 end
 
 function Controller:set(prop, value)
     if (is_in(_MEMBERS_SPECIAL, prop)) then
         if (prop == "color") then
             if (type(value) == "number") then
-                self.display_object:setFillColor(value)
+                self["presentation"]:setFillColor(value)
             else
-                self.display_object:setFillColor(unpack(value))
+                self["presentation"]:setFillColor(unpack(value))
             end
         else
             self[prop] = value
@@ -62,7 +63,7 @@ function Controller:set(prop, value)
         if (self[prop] ~= value) then
             self[prop] = value
             if (prop == "x" or prop == "y" or prop == "width" or prop == "height") then
-                self.display_object[prop] = value
+                self["presentation"][prop] = value
             end
             if (self.parent) then
                 print("Se afectó una variable dimensional de "..self.id.."(padre: "..self.parent.id.."). Se ajustan los hijos del padre:")
@@ -71,7 +72,7 @@ function Controller:set(prop, value)
             end
         end
     else
-        self.display_object[prop] = value
+        self["presentation"][prop] = value
     end
 end
 

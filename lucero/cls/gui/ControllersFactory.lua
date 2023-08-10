@@ -1,5 +1,6 @@
 local ClassPrototype = require("ClassPrototype")
 local Controller = require("Controller")
+local StyledController = require("StyledController")
 local Factory = ClassPrototype:new()
 Factory.__index = Factory
 
@@ -12,10 +13,16 @@ function Factory:new(selected_SDK)
     return o
 end
 
-function Factory:create(id, presentation_type, options, parent)
+function Factory:create(id, presentation_type, options, parent, children, presentation, style)
     id = id or autoset:id()
-    local o = _SDK_SELECTED:create_Presentation(presentation_type, options)
-    return Controller:new(id, options, parent):set("display_object", display_object)
+    local presentation = _SDK_SELECTED:create_Presentation(presentation_type, options)
+    if style then
+        return StyledController:new(id, options, parent, children, style)
+                                :set("presentation", presentation)
+    else
+        return Controller:new(id, options, parent, children)
+                                :set("presentation", presentation)
+    end
 end
 
 return Factory

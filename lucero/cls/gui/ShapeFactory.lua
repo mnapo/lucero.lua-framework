@@ -1,6 +1,6 @@
 local ClassPrototype = require("ClassPrototype")
-local ShapeController = require("ShapeController")
-local StyledShapeController = require("StyledShapeController")
+local ShapeController = require("Shape")
+local StyledShapeController = require("StyledShape")
 local Factory = ClassPrototype:new()
 Factory.__index = Factory
 
@@ -15,9 +15,9 @@ function Factory:create(id, object_type, options, parent, style)
     id = id or autoset:id()
     local display_object = _SDK_SELECTED:create_DisplayObject(object_type, options)
     if style then
-        return ShapeController:new(id, options, parent):set("display_object", display_object)
+        return StyledShape:new(id, options, parent):set("display_object", display_object)
     else
-        return StyledShapeController:new(id, options, parent, style):set("display_object", display_object)
+        return Shape:new(id, options, parent, style):set("display_object", display_object)
     end
 end
 

@@ -5,6 +5,7 @@ Adapter.__index = Adapter
 local valid_SDK_names = _SDK_VALID_NAMES or {}
 
 function Adapter:new(SDK_Bridge)
+    _SDK_SELECTED = self
     local o = ClassPrototype:new()
     o:set("SDK_Bridge", SDK_Bridge)
     o = setmetatable(o, self)
@@ -22,9 +23,16 @@ function Adapter:set_SDK_Bridge(SDK_Bridge)
     return test --remove
 end
 
-function Adapter:create_DisplayObject(type, options)
+function Adapter:create_Presentation(object_type, options)
+    local o = {
+        ["object_type"] = object_type
+    table.unpack(options)}
+    return o
+end
+
+function Adapter:create_DisplayObject(object_type, options)
     local creators = self:get("SDK_Bridge"):get("creators")
-    local creator = creators[type]
+    local creator = creators[object_type]
     return creator(options)
 end
 

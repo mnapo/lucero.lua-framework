@@ -10,7 +10,6 @@ function DOM_Formatter:new(ControllersList, ListParent)
 end
 
 function DOM_Formatter:format()
---[[TO-DO: uncomment after testing
     local parent_id = ""
     local ini_x = 0
     local ini_y = 0
@@ -54,13 +53,8 @@ function DOM_Formatter:format()
         Leaf:set("x", leaf_x)
         Leaf:set("y", leaf_y)
         LeafChildrenFormatter:format()
-    end]]
+    end
     return "test"
-end
-
---[TO-DO]: delete (testing)
-function DOM_Formatter:print_parent()
-    print(self.parent)
 end
 
 return DOM_Formatter
